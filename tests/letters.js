@@ -53,4 +53,21 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('от топота копыт', false), 'а копыт');
 		assert.strictEqual(letters('hello world', false), 'he world');
 	});
+
+	QUnit.test('Удаляет подряд идущие повторяющиеся буквы в разных словах', function (assert) {
+		assert.strictEqual(letters('121 111 2521'), '5');
+		assert.strictEqual(letters('xyz axxb zb'), 'y a ');
+
+		assert.strictEqual(letters('//! qwerty yz//', false), '!qwert yz/');
+		assert.strictEqual(letters('89851565228 8833', false), '91652 83');
+
+		assert.strictEqual(letters('apple pieeee', true), 'aple i');
+		assert.strictEqual(letters('Unicooorns Are ReAl', true), 'Unicors AeRl');
+	});
+
+	QUnit.test('Удаление заглавных повторяющихся букв', function (assert) {
+		assert.strictEqual(letters('RocK RaVe riVeR'), 'ocKari');
+		assert.strictEqual(letters('Живой МиР ЖИВотных МИРЭА', false), 'вйиЖВотных МИРЭА');
+		assert.strictEqual(letters('ГаРрИ ПотТер ДаРы СмеРтИ', true), 'ГаРрИ ПотТеДыСм');
+	});
 });
